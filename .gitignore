@@ -1,0 +1,57 @@
+# **Windows Specific Files**
+Thumbs.db
+Desktop.ini
+
+# **Unreal Engine Specific Folders**
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vscode/
+
+# **Compiled Object Files and Executables**
+*.dll
+*.exe
+*.pdb
+*.lib
+*.app
+*.dSYM
+*.ipa
+
+# **Log Files**
+*.log
+
+# **Backup Files**
+*.bak
+
+# **User-specific IDE Files**
+.vs/
+.idea/
+*.suo
+*.user
+*.userprefs
+*.sdf
+*.opensdf
+*.VC.db
+
+# **MacOS Specific Files **
+.DS_Store
+
+# **Other Cache/Temporary Files**
+*.tmp
+*.temp
+
+# **Generated Files from Plugins**
+Plugins/*/Intermediate/
+Plugins/*/Binaries/
+
+# **Ignore default folders from Unreal Engine Projects**
+# Unreal engine stores certain settings and states here
+*.uprojectdirs
+
+# Unreal Engine Editor Settings
+*.ini
+
+# **Exclude Blueprints saved data (optional, if you don’t want to store autosave)**
+Saved/Autosaves/
