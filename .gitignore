@@ -55,3 +55,5 @@ Plugins/*/Binaries/
 
 # **Exclude Blueprints saved data (optional, if you don’t want to store autosave)**
 Saved/Autosaves/
+
+
