@@ -4,19 +4,27 @@
 #include "Character/C_BasePlayerCharacter.h"
 #include "GAS/C_BaseAttributeSet.h"
 #include "AbilitySystemComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 AC_BasePlayerCharacter::AC_BasePlayerCharacter()
 {
  
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 	
 	//先创建一个骨骼网格体子类，然后创建一个附着人物骨骼网格体插槽，最后把碰撞设置为false
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), TEXT("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-}
+    /**开始点，以下是测试鼠标控制视角移动*/
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(400.f, 400.f, 400.f);
 
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
+}
+    /**结束点*/
 void AC_BasePlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -32,14 +40,6 @@ void AC_BasePlayerCharacter::BeginPlay()
 	}
 	
 }
-
-
-void AC_BasePlayerCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 
 void AC_BasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -65,9 +65,9 @@ void AC_BasePlayerCharacter::OnStrengthChangedDeclare(const FOnAttributeChangeDa
 FGameplayAbilityInfo AC_BasePlayerCharacter::GameplayAbilityInfo(TSubclassOf<UC_BaseGameplayAbility> AbilityClass,
 	int lever)
 {
-	UAbilitySystemComponent* AbilitySystemComponent = this->FindComponentByClass<UAbilitySystemComponent>();
+	UAbilitySystemComponent* ASC = this->FindComponentByClass<UAbilitySystemComponent>();
 	UC_BaseGameplayAbility* AbilityInfomation = AbilityClass->GetDefaultObject<UC_BaseGameplayAbility>();
-	if (AbilityInfomation && AbilitySystemComponent)
+	if (AbilityInfomation && ASC)
 	{
 		return AbilityInfomation->GetAbilityInfo(lever);
 		

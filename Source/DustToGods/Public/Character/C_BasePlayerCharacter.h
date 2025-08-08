@@ -4,8 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemComponent.h"
 #include "GAS/C_BaseGameplayAbility.h"
 #include "C_BasePlayerCharacter.generated.h"
+
+class AbilitySystemComponent;
 
 //声明_动态_多播_委托_一个参数
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDataChangedEvent,float,NewValue);
@@ -18,20 +21,6 @@ class DUSTTOGODS_API AC_BasePlayerCharacter : public ACharacter
 public:
 	
 	AC_BasePlayerCharacter();
-
-protected:
-	
-	virtual void BeginPlay() override;
-
-	
-	UPROPERTY(EditAnywhere,Category="Combot")
-	TObjectPtr<USkeletalMeshComponent> Weapon;
-	
-
-public:	
-	
-	virtual void Tick(float DeltaTime) override;
-
 	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -52,5 +41,18 @@ public:
 
 	UFUNCTION(BlueprintPure,Category="BaseCharacter")
 	FGameplayAbilityInfo GameplayAbilityInfo(TSubclassOf<UC_BaseGameplayAbility>AbilityClass,int lever);
-	
+
+protected:
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere,Category="Combot")
+	TObjectPtr<USkeletalMeshComponent> Weapon;
+
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
+    	
+
 };
